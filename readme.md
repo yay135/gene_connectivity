@@ -3,7 +3,25 @@
 This project aims to map gene connectivities using different deep learning models such as MLP, Autoencoders and GNNs with additional gene edges. Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs etc. After the models are built, we compared the model performances and found that different gene edges result in drastic different mapping qualities in GNNs, some edges are more useful than others. Between models, some models shows much stronger performance againt other models suggesting high task specificities in gene mapping.
 
 ## 2. Data and model availability
-Datasets are fully released. Due to the large size, model files are not released in this repository.
+Datasets are fully released. Due to the large size, model files are not released in this repository. This repository supports complete training and testing with the following models and options:  
+### 2.1 Available models
+MLP  
+Autoencoder  
+LinearRegression
+GCN
+PNA
+### 2.2 Available datasets
+Training on GTEx normal, testing on TCGA normal    
+Training on TCGA BC, testing on CPTAC BC  
+Training on TCGA BC, testing on CCLE BC  
+### 2.3 Availabale edges 
+Correlation  
+String (PPI)  
+Dorothea (TF)  
+Hi-C inter-chromosome (3D)  
+Hi-C intra-chromosome (3D)  
+Pathway  
+Spatial (1D)   
 ## 3. How to use this repo
 ### 3.1 System requirements
 You must have at least 100GB free disk space, at least 64GB usable RAM size and a 4 core CPU with AVX support.  
