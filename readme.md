@@ -1,6 +1,6 @@
 # Project Gene Connectivity
 ## 1. Introduction
-This project aims to map gene connectivities using different deep learning models such MLP, Autoencoders and GNNs with additional gene edges. Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs etc. After the models are built, we compared the model performances and found that different gene edges result in drastic different mapping qualities in GNNs, some edges are more useful than others. Between models, some models shows much stronger performance againt other models suggesting high task specificities in gene mapping.
+This project aims to map gene connectivities using different deep learning models such as MLP, Autoencoders and GNNs with additional gene edges. Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs etc. After the models are built, we compared the model performances and found that different gene edges result in drastic different mapping qualities in GNNs, some edges are more useful than others. Between models, some models shows much stronger performance againt other models suggesting high task specificities in gene mapping.
 
 ## 2. Data and model availability
 Datasets are fully released. Due to the large size, model files are not released in this repository.
@@ -40,7 +40,7 @@ Run the following command to install all the required python libraries.
 Data is included the in repository, the data is downloaded automatically when the repository is cloned.
 
 #### 3.5.2 Data types
-The data includes expression data normalized and MinMax scaled. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicated training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
+The data includes expression data normalized and MinMax scaled. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
 
 The X.csv is the training predictor gene expression dataset.  
 The y.csv is the training inferred gene expression dataset.  
@@ -50,7 +50,7 @@ The y_val.csv is the testing inferred gene expression dataset.
 The edge datasets are in folders end with "edges". The first column is the source of the edge, the second column is the target of the edge. For example, in pathway_gtex_tcga_normal.csv 3249,15423 indicates the 3249th column (X.csv , y.csv horizontally combined) is pointing the 15423 column as an edge in dataset gtex_tcga_normal, each column is a gene and is 0 indexed.  
 
 #### 3.5.3 Output
-The testing is automatically initialized after the training. The output data are inferred gene expressions. They will appear in folder model_out with model type, edge type and training, testing data informations attached to the file name.
+The testing is automatically initialized after the training. The output is inferred gene expressions. They will appear in folder model_out with model type, edge type and training, testing data informations attached to the file name.
 
 ### 3.6 Example tasks
 CD into the root folder, modify the configure.py to run different tasks.
@@ -68,7 +68,7 @@ then
 
 ``python run.py``
 
-This will traing and test an autoencoder on the tcga_cptac breast cancer dataset. edges are ignored if model_type is not set to 'gcn' or 'pna'.
+This will traing and test an autoencoder on the tcga cptac breast cancer dataset. Edges are ignored if model_type is not set to 'gcn' or 'pna'.
 
 ### 3.6.2
 Modify configure.py the enclosed lines as follows
@@ -84,7 +84,7 @@ then
 
 ``python run.py``
 
-this will train a pna model on tcga ccle breast cancer dataset and with additional edges such as correlation, PPI, Hic edges, and Pathway edges.
+This will train a pna model on tcga ccle breast cancer dataset and with additional edges such as correlations, PPI, Hic edges, and Pathway edges.
 
 ## Team
 Fengyao Yan fxy134@miami.edu 
