@@ -74,7 +74,7 @@ CD into the root folder, modify the configure.py to run different tasks.
 ### 3.6.1
 Modify configure.py the enclosed lines as follows
 
-**********************************************************
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 model_type = 'auto_encoder'  
 mask_exp = False  
 fd = 'tcga_cptac_bc'  
