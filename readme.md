@@ -11,10 +11,10 @@ A CUDA 11.6 compatible NVIDIA GPU with 64 GB or more VRAM.
 Ubuntu 16.04+ 
 
 ### 3.2 Install the Required Software
-Install the following software:
-conda 23.5.2
-NVIDIA GPU driver for linux 510.47.03
-CUDA 11.6
+#### 3.2.1 Install the following software:
+conda 23.5.2  
+NVIDIA GPU driver for linux 510.47.03  
+CUDA 11.6  
 
 ### 3.3 Clone the current project
 Run the following command to clone the project.  
@@ -42,12 +42,12 @@ Data is included the in repository, the data is downloaded automatically when th
 #### 3.5.2 Data types
 The data includes expression data normalized and MinMax scaled. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicated training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset. 
 
-The X.csv is the training predictor gene expression dataset
-The y.csv is the training inferred gene expression dataset
-The X_val.csv is the testing predictor gene expression dataset
-The y_val.csv is the testing inferred gene expression dataset
+The X.csv is the training predictor gene expression dataset.  
+The y.csv is the training inferred gene expression dataset.  
+The X_val.csv is the testing predictor gene expression dataset.  
+The y_val.csv is the testing inferred gene expression dataset.  
 
-The edge data is in folders end with "edges". The first column is the source of the edge, the second column is the target of the edge. For example, in pathway_gtex_tcga_normal.csv 3249,15423 indicates the 3249th column (X.csv , y.csv horizontally combined) is pointing the 15423 column as an edge in dataset gtex_tcga_normal, each column is a gene and is 0 indexed.
+The edge datasets are in folders end with "edges". The first column is the source of the edge, the second column is the target of the edge. For example, in pathway_gtex_tcga_normal.csv 3249,15423 indicates the 3249th column (X.csv , y.csv horizontally combined) is pointing the 15423 column as an edge in dataset gtex_tcga_normal, each column is a gene and is 0 indexed.
 
 #### 3.5.3 Output tissue types
 The testing of automatically initialized after the training. The output data are infered gene expressions. They will appear in folder model_out with model type edge type and training testing data informations attached to the file name.
