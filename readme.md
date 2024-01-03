@@ -29,8 +29,7 @@ A CUDA 11.6 compatible NVIDIA GPU with 64 GB or more VRAM.
 Ubuntu 16.04+  
 
 ### 3.2 Install the Required Software
-#### 3.2.1 Install the following software:
-conda 23.5.2  
+Anaconda 23.5.2  
 NVIDIA GPU driver for linux 510.47.03  
 CUDA 11.6  
 
