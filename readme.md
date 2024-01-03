@@ -50,7 +50,7 @@ The y_val.csv is the testing inferred gene expression dataset.
 The edge datasets are in folders end with "edges". The first column is the source of the edge, the second column is the target of the edge. For example, in pathway_gtex_tcga_normal.csv 3249,15423 indicates the 3249th column (X.csv , y.csv horizontally combined) is pointing the 15423 column as an edge in dataset gtex_tcga_normal, each column is a gene and is 0 indexed.
 
 #### 3.5.3 Output tissue types
-The testing of automatically initialized after the training. The output data are infered gene expressions. They will appear in folder model_out with model type edge type and training testing data informations attached to the file name.
+The testing is automatically initialized after the training. The output data are inferred gene expressions. They will appear in folder model_out with model type, edge type and training, testing data informations attached to the file name.
 
 ### 3.6 Example tasks
 CD into the root folder, modify the configure.py to run different tasks.
@@ -58,10 +58,10 @@ CD into the root folder, modify the configure.py to run different tasks.
 Modify configure.py the enclosed lines as follows
 
 **********************************************************
-model_type = 'auto_encoder'
-mask_exp = False
-fd = 'tcga_cptac_bc'
-edges = ["cor", "string", "dorothea", "hic_intra", "pathway", "spatial", "hic_inter"]
+model_type = 'auto_encoder'  
+mask_exp = False  
+fd = 'tcga_cptac_bc'  
+edges = ["cor", "string", "dorothea", "hic_intra", "pathway", "spatial", "hic_inter"]  
 ************************************************************
 
 then 
@@ -74,10 +74,10 @@ This will traing and test an autoencoder on the tcga_cptac breast cancer dataset
 Modify configure.py the enclosed lines as follows
 
 **********************************************************
-model_type = 'pna'
-mask_exp = False
-fd = 'tcga_ccle_bc'
-edges = ["cor", "string", "hic_intra", "pathway"]
+model_type = 'pna'  
+mask_exp = False  
+fd = 'tcga_ccle_bc'  
+edges = ["cor", "string", "hic_intra", "pathway"]  
 ************************************************************
 
 then 
