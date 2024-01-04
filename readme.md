@@ -56,7 +56,7 @@ Run the following command to install all the required python libraries.
 
 ### 3.5 Run training and validation
 #### 3.5.1 Data 
-Data is included the in repository, the data is downloaded automatically when the repository is cloned. Run the following command to initialize the required data:  
+Run the following command to initialize the required data:  
 ``python init_data.py``
 
 #### 3.5.2 Data types
