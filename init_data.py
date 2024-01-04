@@ -10,3 +10,6 @@ with ZipFile("project_gene_transformer_data.zip", 'r') as zObject:
     # into a specific location. 
     zObject.extractall( 
         path=".") 
+
+
+print("data init successful!")
