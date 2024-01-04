@@ -33,6 +33,8 @@ Anaconda 23.5.2
 NVIDIA GPU driver for linux 510.47.03  
 CUDA 11.6  
 
+Addtionally make sure your system have bash and wget installed.
+
 ### 3.3 Clone the current project
 Run the following command to clone the project.  
 ``git clone https://github.com/yay135/gene_connectivity.git``  
@@ -54,7 +56,8 @@ Run the following command to install all the required python libraries.
 
 ### 3.5 Run training and validation
 #### 3.5.1 Data 
-Data is included the in repository, the data is downloaded automatically when the repository is cloned.
+Data is included the in repository, the data is downloaded automatically when the repository is cloned. Run the following command to initialize the required data:  
+``python init_data.py``
 
 #### 3.5.2 Data types
 The data includes expression data normalized and MinMax scaled. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
