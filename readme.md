@@ -74,12 +74,12 @@ CD into the root folder, modify the configure.py to run different tasks.
 ### 3.6.1
 Modify configure.py the enclosed lines as follows
 
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
 model_type = 'auto_encoder'  
 mask_exp = False  
 fd = 'tcga_cptac_bc'  
 edges = ["cor", "string", "dorothea", "hic_intra", "pathway", "spatial", "hic_inter"]  
-************************************************************
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
 
 then 
 
@@ -90,12 +90,12 @@ This will traing and test an autoencoder on the tcga cptac breast cancer dataset
 ### 3.6.2
 Modify configure.py the enclosed lines as follows
 
-**********************************************************
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
 model_type = 'pna'  
 mask_exp = False  
 fd = 'tcga_ccle_bc'  
 edges = ["cor", "string", "hic_intra", "pathway"]  
-************************************************************
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
 
 then 
 
