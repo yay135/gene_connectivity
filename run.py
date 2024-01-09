@@ -51,11 +51,11 @@ if len(data_folder) != 1:
     print(f'can not find data folder {fd}')
     exit(1)
 
-
-qedges = list(filter(lambda x:x in ["cor", "hic_inter", "hic_intra", "pathway", "spatial",  "string", "dorothea"], edges))
-if len(qedges) < len(edges):
-    print('check your edge selections')
-    exit(1)
+if edges is not None:
+    qedges = list(filter(lambda x:x in ["cor", "hic_inter", "hic_intra", "pathway", "spatial",  "string", "dorothea"], edges))
+    if len(qedges) < len(edges):
+        print('check your edge selections')
+        exit(1)
 
 #select file to run
 run_file = list(filter(lambda x:x.split('.')[0]==model_type and x.split('.')[1]=='py', os.listdir('.')))[0]

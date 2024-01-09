@@ -10,8 +10,6 @@ from sklearn.metrics import mean_absolute_error
 from torch.utils.data import DataLoader, Dataset
 from torch.utils.data import Dataset, random_split
 import torch.nn.functional as F
-# from configure import X_path, y_path, X_masked_path, mlp_model_path, mlp_model_name, \
-#     mlp_model_masked_name
 
 parser = argparse.ArgumentParser()
 
