@@ -35,11 +35,14 @@ A CUDA 11.6 compatible NVIDIA GPU with 48 GB or more VRAM. (If you are not able 
 Ubuntu 16.04+  
 
 ### 3.2 Install the Required Software
-Anaconda 23.5.2  
-NVIDIA GPU driver for Linux 510.47.03  
-CUDA 11.6  
+bash @ lastest
+wget @ lastest
+Anaconda @ 23.5.2  
+NVIDIA GPU driver for Linux 510.47.03  (required if you wish to use GPU)  
+CUDA 11.6 (required if you wish to use GPU)  
 
-Additionally, make sure your system has bash and wget installed.
+The rest of the softwares such as pytorch are configured automatically using conda or pip.
+
 ### 3.3 Clone the current project
 Run the following command to clone the project.  
 ``git clone https://github.com/yay135/gene_connectivity.git``  
