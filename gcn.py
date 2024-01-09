@@ -127,10 +127,6 @@ if "dorothea" in choices:
             edge_add(edge_index, edge_attr, edge_type, dorothea_edges)
     
     print(edge_index.shape)
-# if "network" in choices:
-#     network_edges = pd.read_csv(network_pna_edge_file, index_col=0).T.values
-#     edge_index, edge_attr, edge_type = \
-#             edge_add(edge_index, edge_attr, edge_type, network_edges)
     
 if "hic_intra" in choices:
     hic_edges = pd.read_csv(hic_edge_intra).T.values
