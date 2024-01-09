@@ -94,35 +94,23 @@ The edge datasets are in folders ending with "edges". The first column is the so
 The testing is automatically initialized after the training. The output is inferred gene expressions. They will appear in the folder model_out with model type, edge type, and training, and testing data information attached to the file name.
 
 ### 3.6 Example tasks
-CD into the root folder, and modify the configure.py to run different tasks.
+CD into the root folder, and modify the configure.py to run different tasks.  
+Options:  
+--help show all available options.    
+-m/--model specify model type.  
+-d/--data specify dataset configuration.  
+-e/--edges specigy edges you wish to input to pna or gcn.    
+-k/--mask specify whether to use masked datasets.  
+-v/--validation specify whether to run validation test after training.  
+
+
+
 #### 3.6.1 Example 1
-Modify configure.py the enclosed lines as follows
-
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
-model_type = 'auto_encoder'  
-mask_exp = False  
-fd = 'tcga_cptac_bc'  
-edges = ["cor", "string", "dorothea", "hic_intra", "pathway", "spatial", "hic_inter"]  
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
-
-then 
-
-``python run.py``
+``python run.py -m auto_encoder -d tcga_cptac_bc``  
 
 This will train and test an autoencoder on the tcga and cptac breast cancer dataset. Edges are ignored if model_type is not set to 'gcn' or 'pna'.
 #### 3.6.2 Example 2
-Modify configure.py the enclosed lines as follows
-
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
-model_type = 'pna'  
-mask_exp = False  
-fd = 'tcga_ccle_bc'  
-edges = ["cor", "string", "hic_intra", "pathway"]  
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
-
-then 
-
-``python run.py``
+``python run.py -m pna -d tcga_ccle_bc -e cor hic_inter pathway string dorothea``  
 
 This will train a pna model on tcga ccle breast cancer dataset and with additional edges such as correlations, PPI, Hic edges, and Pathway edges.
 

@@ -1,20 +1,72 @@
 import os
-import sys
 import torch
 import time
-import subprocess
+import argparse
+import numpy as np
 import pandas as pd
 import torch.nn as nn
 from tqdm import tqdm
+from sklearn.metrics import mean_absolute_error
 from torch.utils.data import DataLoader, Dataset
 from torch.utils.data import Dataset, random_split
 import torch.nn.functional as F
-from configure import X_path, y_path, X_masked_path, mlp_model_path, mlp_model_name, \
-    mlp_model_masked_name
+# from configure import X_path, y_path, X_masked_path, mlp_model_path, mlp_model_name, \
+#     mlp_model_masked_name
 
-masked = False
-if len(sys.argv) == 2:
-    masked = int(sys.argv[1])
+parser = argparse.ArgumentParser()
+
+masks = ["true", 'false']
+parser.add_argument('-k', '--mask', type=str, choices=masks, required=False, default="false",\
+                    help='whether to use masked dataset. default=false.')
+
+validations = ["true", 'false']
+parser.add_argument('-v', '--validation', type=str, choices=validations, required=False, default="true",\
+                    help='whether to run validation after training. default=true.')
+
+data_choices=['gtex_tcga_normal', 'tcga_ccle_bc', 'tcga_cptac_bc']
+parser.add_argument('-d', '--data', type=str, choices=data_choices, required=True, help='select a dataset configuration.')
+
+args = parser.parse_args()
+
+masked = args.mask == 'true'
+validation = args.validation == 'true'
+fd = args.data
+
+#configuring path
+X_path = f'{fd}/X.csv'
+y_path = f'{fd}/y.csv'
+
+X_val_path = f'{fd}/X_val.csv'
+y_val_path = f'{fd}/y_val.csv'
+
+X_masked_path = f'{fd}/mask_ratio_0.7_X.csv'
+X_val_masked_path = f'{fd}/mask_ratio_0.7_X_val.csv'
+
+out_folder = 'model_out'
+if not os.path.exists(out_folder) :
+    os.mkdir(out_folder)
+
+mlp_model_path = 'mlp_states'
+if not os.path.exists(mlp_model_path) :
+    os.mkdir(mlp_model_path)
+
+mlp_model_name = f'{fd}.pth'
+mlp_model_masked_name = f'{fd}_exp_masked.pth'
+
+mlp_y_pred_path = f'{out_folder}/mlp_{fd}_out.csv'
+mlp_y_pred_path_masked = f'{out_folder}/mlp_{fd}_exp_masked_out.csv'
+
+csv_x = X_path if not masked else X_masked_path
+csv_y = y_path
+model_save_name = mlp_model_name if not masked else mlp_model_masked_name
+save_model_path = os.path.join(mlp_model_path, model_save_name)
+
+csv_x = X_val_path if not masked else X_val_masked_path
+csv_y = y_val_path
+model_save_name = mlp_model_name if not masked else mlp_model_masked_name
+model_path = os.path.join(mlp_model_path, model_save_name)
+pred_path = mlp_y_pred_path if not masked else mlp_y_pred_path_masked
+
 
 learning_rate = 0.0008
 num_epochs = 100
@@ -25,10 +77,6 @@ test = 0.1
 patience = 5
 cuda = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-csv_x = X_path if not masked else X_masked_path
-csv_y = y_path
-model_save_name = mlp_model_name if not masked else mlp_model_masked_name
-save_model_path = os.path.join(mlp_model_path, model_save_name)
 
 class CustomDataset(Dataset):
     def __init__(self, csv_x, csv_y):
@@ -136,4 +184,31 @@ if __name__ == '__main__':
                 print(f'no change after {patience} epochs stopping ...')
                 break
 
-    subprocess.run('python', 'mlp_validation.py')
+    if validation:
+        custom_dataset = CustomDataset(csv_x=csv_x, csv_y=csv_y)
+        data_loader = DataLoader(custom_dataset, batch_size=1, shuffle=False, num_workers=1)
+        input_dim = custom_dataset.x.shape[1]
+        out_dim = custom_dataset.y.shape[1]
+        nsamples = len(custom_dataset.x)
+
+        model = MLP(input_size=input_dim, hidden_size=hidden, output_size=out_dim)
+
+        model.load_state_dict(torch.load(model_path))
+
+
+        y_pred_list = []
+        model.eval()
+        with torch.no_grad():
+            for i, data in enumerate(data_loader):
+                input, out = data
+                y_pred = model(input)
+                y_pred_list.append(y_pred.numpy())
+                print(f'mae: {mean_absolute_error(y_pred.numpy(), out.numpy())}')
+
+        pred = np.concatenate(y_pred_list, axis=0)
+        pred = pd.DataFrame(pred, columns=custom_dataset.y.columns)
+
+            # caculate columns wise pcc
+        assert(pred.shape == custom_dataset.y.shape)
+        pred_df = pd.DataFrame(pred, columns=custom_dataset.y.columns)
+        pred.to_csv(pred_path, index=False)

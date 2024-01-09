@@ -1,38 +1,73 @@
 import os
-import sys
 import random
 import torch
-import pickle 
+import argparse
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import torch.nn.functional as F
 from torch_geometric.data import Data
 from torch_geometric.nn import GCNConv, Linear
-from configure import hic_edge_intra, hic_edge_inter, string_edge_file,\
-      dorothea_edge_file, pathway_edge_file, spatial_edge_file,\
-X_masked_path, y_path, X_path, X_val_masked_path, X_val_path, y_val_path, \
-gcn_model_masked_name, gcn_model_name, gcn_model_path, gcn_y_pred_path,\
-gcn_y_pred_path_masked, mask_exp
 
-print(X_path)
-print(X_masked_path)
-print(hic_edge_inter)
-print(hic_edge_intra)
-print(spatial_edge_file)
-print(pathway_edge_file)
 
-is_masked = mask_exp
-validate = True
+parser = argparse.ArgumentParser()
 
-edge_choices = ["cor", "hic_inter", "hic_intra", "pathway", "spatial", "string", "dorothea"]
+masks = ["true", 'false']
+parser.add_argument('-k', '--mask', type=str, choices=masks, required=False, default="false",\
+                    help='whether to use masked dataset. default=false.')
 
-edges = sys.argv[1:]
-choices = [e for e in edges if e in edge_choices]
-if len(choices) < 1:
-    print("error: must specify at least 1 edge type")
-    exit()
+validations = ["true", 'false']
+parser.add_argument('-v', '--validation', type=str, choices=validations, required=False, default="true",\
+                    help='whether to run validation after training. default=true.')
 
+data_choices=['gtex_tcga_normal', 'tcga_ccle_bc', 'tcga_cptac_bc']
+parser.add_argument('-d', '--data', type=str, choices=data_choices, required=True, help='select a dataset configuration.')
+
+edge_choices = ["cor", "string", "dorothea", "hic_intra", "pathway", "spatial", "hic_inter"]
+parser.add_argument('-e', '--edges', type=str, nargs='+', choices=edge_choices, required=True,\
+                    help='choose edges can be multipe, ignored if model is not pna or gcn.')
+
+args = parser.parse_args()
+
+is_masked = args.mask == 'true'
+validate = args.validation == 'true'
+fd = args.data
+edges = args.edges
+edge_str = '_'.join(edges)
+choices = args.edges
+
+edge_str = '_'.join(edges)
+
+X_path = f'{fd}/X.csv'
+y_path = f'{fd}/y.csv'
+
+X_val_path = f'{fd}/X_val.csv'
+y_val_path = f'{fd}/y_val.csv'
+
+X_masked_path = f'{fd}/mask_ratio_0.7_X.csv'
+X_val_masked_path = f'{fd}/mask_ratio_0.7_X_val.csv'
+
+out_folder = 'model_out'
+if not os.path.exists(out_folder) :
+    os.mkdir(out_folder)
+
+gcn_model_path = 'gcn_states'
+if not os.path.exists(gcn_model_path) :
+    os.mkdir(gcn_model_path)
+
+gcn_model_name = f'{fd}.pth'
+gcn_model_masked_name = f'{fd}_exp_masked.pth'
+
+gcn_y_pred_path = f'{out_folder}/mlp_{fd}_{edge_str}_out.csv'
+gcn_y_pred_path_masked = f'{out_folder}/mlp_{fd}_{edge_str}_exp_masked_out.csv'
+
+pathway_edge_file = f'pathway_edges/pathways_{fd}.csv'
+spatial_edge_file = f'1d_edges/spatial_{fd}.csv'
+hic_edge_inter = f'hic_edges_inter/hic_inter_{fd}.csv'
+hic_edge_intra = f'hic_edges_intra/hic_intra_{fd}.csv'
+
+string_edge_file = f'string_edges/string_{fd}.csv'
+dorothea_edge_file = f'dorothea_edges/dorothea_{fd}.csv'
 
 learning_rate = 0.0001
 num_epochs = 100

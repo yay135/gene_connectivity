@@ -1,27 +1,59 @@
 import os
-import sys
 import torch
 import time
-import subprocess
+import argparse
+import numpy as np
 import pandas as pd
 import torch.nn as nn
 from tqdm import tqdm
+from sklearn.metrics import mean_absolute_error
 from torch.utils.data import DataLoader, Dataset, random_split
 import torch.nn.functional as F
-from configure import X_path, y_path, X_masked_path, autoenc_model_path, autoenc_model_name,\
-autoenc_model_masked_name
 
-masked = False
-if len(sys.argv) == 2:
-    masked = int(sys.argv[1])
+parser = argparse.ArgumentParser()
 
-learning_rate = 0.0008
-num_epochs = 100
-encoding_dim = 256
-bs = 8
-patience = 5
-cuda = 'cuda' if torch.cuda.is_available() else 'cpu'
-train = 0.9
+
+masks = ["true", 'false']
+parser.add_argument('-k', '--mask', type=str, choices=masks, required=False, default="false",\
+                    help='whether to use masked dataset. default=false.')
+
+validations = ["true", 'false']
+parser.add_argument('-v', '--validation', type=str, choices=validations, required=False, default="true",\
+                    help='whether to run validation after training. default=true.')
+
+data_choices=['gtex_tcga_normal', 'tcga_ccle_bc', 'tcga_cptac_bc']
+parser.add_argument('-d', '--data', type=str, choices=data_choices, required=True, help='select a dataset configuration.')
+
+args = parser.parse_args()
+
+masked = args.mask == 'true'
+validation = args.validation == 'true'
+fd = args.data
+
+#configuring path
+
+X_path = f'{fd}/X.csv'
+y_path = f'{fd}/y.csv'
+
+X_val_path = f'{fd}/X_val.csv'
+y_val_path = f'{fd}/y_val.csv'
+
+X_masked_path = f'{fd}/mask_ratio_0.7_X.csv'
+X_val_masked_path = f'{fd}/mask_ratio_0.7_X_val.csv'
+
+out_folder = 'model_out'
+if not os.path.exists(out_folder) :
+    os.mkdir(out_folder)
+
+autoenc_model_path = 'auto_encoder_states'
+if not os.path.exists(autoenc_model_path) :
+    os.mkdir(autoenc_model_path)
+
+autoenc_model_name = f'{fd}.pth'
+autoenc_model_masked_name = f'{fd}_exp_masked.pth'
+
+autoenc_y_pred_path = f'{out_folder}/auto_{fd}_out.csv'
+autoenc_y_pred_path_masked = f'{out_folder}/auto_{fd}_exp_masked_out.csv'
 
 csv_x = X_path
 if masked:
@@ -32,6 +64,32 @@ csv_x_true = X_path
 save_model_path = os.path.join(autoenc_model_path, autoenc_model_name)
 if masked:
     save_model_path = os.path.join(autoenc_model_path, autoenc_model_masked_name)
+
+# configure validation path
+csv_x = X_val_path
+if masked:
+    csv_x = X_val_masked_path
+
+csv_y = y_val_path
+# the true values of input without masking.
+csv_x_true = X_val_path
+model_path = os.path.join(autoenc_model_path, autoenc_model_name)
+if masked:
+    model_path = os.path.join(autoenc_model_path, autoenc_model_masked_name)
+
+pred_path = autoenc_y_pred_path
+if masked:
+    pred_path = autoenc_y_pred_path_masked
+
+
+# configure training parameters
+learning_rate = 0.0008
+num_epochs = 100
+encoding_dim = 256
+bs = 8
+patience = 5
+cuda = 'cuda' if torch.cuda.is_available() else 'cpu'
+train = 0.9
 
 class CustomDataset(Dataset):
     def __init__(self, csv_x, csv_x_true, csv_y):
@@ -174,5 +232,32 @@ if __name__ == '__main__':
             if no_change_count > patience:
                 print(f'no change after {patience} epochs stopping ...')
                 break
+    # validation steps
+    if validation:
+        custom_dataset = CustomDataset(csv_x=csv_x, csv_y=csv_y, csv_x_true=csv_x_true)
+        data_loader = DataLoader(custom_dataset, batch_size=1, shuffle=False, num_workers=1)
+        input_dim = custom_dataset.x.shape[1]
+        out_dim = custom_dataset.y.shape[1]
+        nsamples = len(custom_dataset.x)
 
-    subprocess.run(['python' 'auto_encoder_validation.py'])
+        model = RegressionAutoencoder(input_dim=input_dim, encoding_dim=encoding_dim, out_dim=out_dim)
+        model.load_state_dict(torch.load(model_path))
+
+
+        y_pred_list = []
+        model.eval()
+        with torch.no_grad():
+            for i, data in enumerate(data_loader):
+                input, _ ,out = data
+                _, y_pred = model(input)
+                y_pred_list.append(y_pred.numpy())
+                print(f'mae: {mean_absolute_error(y_pred.numpy(), out.numpy())}')
+
+        pred = np.concatenate(y_pred_list, axis=0)
+
+        # caculate columns wise pcc
+        assert(pred.shape == custom_dataset.y.shape)
+        pred_df = pd.DataFrame(pred, columns=custom_dataset.y.columns)
+
+        pccs = pred_df.corrwith(custom_dataset.y)
+        pred_df.to_csv(pred_path, index=False)
