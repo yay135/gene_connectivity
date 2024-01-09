@@ -12,8 +12,8 @@ Datasets are fully released. Due to the large size, model files are not released
 ### 2.1 Available models
 MLP  
 Autoencoder  
-LinearRegression
-GCN
+LinearRegression  
+GCN  
 PNA
 ### 2.2 Available datasets
 Training on GTEx normal, testing on TCGA normal    
