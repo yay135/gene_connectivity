@@ -68,6 +68,7 @@ Activate the environment.
 If you don't have a GPU or if your system specs are different than specified, configure a CPU-only environment as follows:  
 Install Python 3.11 and pip on your system.  
 Run the following command to install all the required Python libraries.  
+``cd gene_connectivity``
 ``conda create -n gnn python=3.10``  
 ``conda activate gnn``  
 ``python -m pip install -r requirements.txt``  
