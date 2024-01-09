@@ -51,6 +51,8 @@ Anaconda @ 23.5.2
 
 The rest of the softwares such as pytorch are configured automatically using conda or pip, see section 3.4.
 
+GPU or CPU selection are automated at the runtime.
+
 ### 3.3 Clone the current project
 Run the following command to clone the project.  
 ``git clone https://github.com/yay135/gene_connectivity.git``  
