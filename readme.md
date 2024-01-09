@@ -57,7 +57,7 @@ GPU or CPU selection is automated at the runtime.
 Run the following command to clone the project.  
 ``git clone https://github.com/yay135/gene_connectivity.git``  
 ### 3.4 Configure environment
-#### 3.4.1 
+#### 3.4.1 Configure for gpu
 Change the directory to the project root folder.  
 ``cd gene_connectivity``  
 
@@ -66,7 +66,7 @@ Run the following command to create a conda environment automatically.
 
 Activate the environment.  
 ``conda activate gnn_cuda``   
-#### 3.4.2
+#### 3.4.2 Configure for cpu
 If you don't have a GPU or if your system specs are different than specified, configure a CPU-only environment as follows:  
 Install Python 3.11 and pip on your system.  
 Run the following command to install all the required Python libraries.  
@@ -95,7 +95,7 @@ The testing is automatically initialized after the training. The output is infer
 
 ### 3.6 Example tasks
 CD into the root folder, and modify the configure.py to run different tasks.
-### 3.6.1
+#### 3.6.1 Example 1
 Modify configure.py the enclosed lines as follows
 
 \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
@@ -110,7 +110,7 @@ then
 ``python run.py``
 
 This will train and test an autoencoder on the tcga and cptac breast cancer dataset. Edges are ignored if model_type is not set to 'gcn' or 'pna'.
-### 3.6.2
+#### 3.6.2 Example 2
 Modify configure.py the enclosed lines as follows
 
 \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*  
