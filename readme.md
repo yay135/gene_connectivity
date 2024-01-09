@@ -7,7 +7,7 @@ This project aims to map gene connectivities using different deep-learning model
 
 Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs, etc. After the models were built, we compared the model performances and found that different gene edges result in drastically different mapping qualities in GNNs, some edges are more useful than others. Between models, some models show much stronger performance against other models suggesting high task specificities in gene mapping.
 
-## 2. Data and model availability
+## 2. Data and model
 Datasets are fully released. Due to the large size, model files are not released in this repository. This repository supports complete training and testing with the following models and options:  
 ### 2.1 Available models
 MLP  
