@@ -31,7 +31,7 @@ Spatial (1D)
 ### 3.1 System requirements
 Due to the immense connections and edges in a gene map (graph), the requirements to train a GCN or PNA to map 20000 genes are high.
 You must have at least 100GB free disk space, at least 64GB usable RAM size, and a 4-core CPU with AVX support.  
-A CUDA 11.6 compatible NVIDIA GPU with 48 GB or more VRAM.  
+A CUDA 11.6 compatible NVIDIA GPU with 48 GB or more VRAM.  (If you are not able to meet the hardware requirements consider configure a cpu-only environment using the 3.4.2 instructions bellow)
 Ubuntu 16.04+  
 
 ### 3.2 Install the Required Software
