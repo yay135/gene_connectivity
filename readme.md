@@ -1,5 +1,8 @@
 # Project Gene Connectivity
 ## 1. Introduction
+
+![alt text](https://github.com/yay135/gene_connectivity/blob/master/arch_gene_connectivity.png?raw=true)
+
 This project aims to map gene connectivities using different deep learning models such as MLP, Autoencoders and GNNs with additional gene edges. Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs etc. After the models are built, we compared the model performances and found that different gene edges result in drastic different mapping qualities in GNNs, some edges are more useful than others. Between models, some models shows much stronger performance againt other models suggesting high task specificities in gene mapping.
 
 ## 2. Data and model availability
@@ -107,4 +110,5 @@ then
 This will train a pna model on tcga ccle breast cancer dataset and with additional edges such as correlations, PPI, Hic edges, and Pathway edges.
 
 ## Team
+If you have any questions or concerns about the project, please contact the following team memeber:
 Fengyao Yan fxy134@miami.edu 
