@@ -39,10 +39,6 @@ fonttools==4.39.3
 frozenlist==1.4.0
 fsspec==2023.6.0
 gast==0.4.0
-google-auth==2.17.3
-google-auth-oauthlib==1.0.0
-google-pasta==0.2.0
-googleapis-common-protos==1.59.0
 grpcio==1.54.0
 h5py==3.8.0
 huggingface-hub==0.16.4

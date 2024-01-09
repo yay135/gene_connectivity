@@ -32,14 +32,22 @@ Spatial (1D)
 Due to the immense connections and edges in a gene map (graph), the requirements to train a GCN or PNA to map 20000 genes are high.
 You must have at least 100GB free disk space, at least 64GB usable RAM size, and a 4-core CPU with AVX support.  
 A CUDA 11.6 compatible NVIDIA GPU with 48 GB or more VRAM. (If you are not able to meet the hardware requirements consider configure a cpu-only environment using the 3.4.2 instructions bellow)  
-Ubuntu 16.04+  
+
 
 ### 3.2 Install the Required Software
-bash @ lastest  
+The following softwares are required if you wish to use GPU:  
+Ubuntu 20.04+  
+bash @ lastest   
 wget @ lastest  
 Anaconda @ 23.5.2  
-NVIDIA GPU driver for Linux 510.47.03  (required if you wish to use GPU)  
-CUDA 11.6 (required if you wish to use GPU)  
+NVIDIA GPU driver for Linux 510.47.03  
+CUDA 11.6  
+
+The following softwares are required if you to use cpu only:  
+Ubuntu 20.04+  
+bash @ lastest   
+wget @ lastest  
+Anaconda @ 23.5.2  
 
 The rest of the softwares such as pytorch are configured automatically using conda or pip.
 
@@ -60,6 +68,8 @@ Activate the environment.
 If you don't have a GPU or if your system specs are different than specified, configure a CPU-only environment as follows:  
 Install Python 3.11 and pip on your system.  
 Run the following command to install all the required Python libraries.  
+``conda create -n gnn python=3.10``
+``conda activate gnn``
 ``python -m pip install -r requirements.txt``  
 
 ### 3.5 Run training and validation
