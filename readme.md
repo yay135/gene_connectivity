@@ -97,22 +97,25 @@ The testing is automatically initialized after the training. The output is infer
 CD into the root folder, and modify the configure.py to run different tasks.  
 Options:  
 --help show all available options.    
--m/--model specify model type.  
--d/--data specify dataset configuration.  
--e/--edges specigy edges you wish to input to pna or gcn.    
--k/--mask specify whether to use masked datasets.  
--v/--validation specify whether to run validation test after training.  
+-m/--model specify model type. Required.  
+-d/--data specify dataset configuration. Required.  
+-e/--edges specigy edges you wish to input to pna or gcn. Required if model is pna or gcn.   
+-k/--mask specify whether to use masked datasets. Default is false.  
+-v/--validation specify whether to run validation test after training. Default is true.   
 
 
 
 #### 3.6.1 Example 1
 ``python run.py -m auto_encoder -d tcga_cptac_bc``  
-
 This will train and test an autoencoder on the tcga and cptac breast cancer dataset. Edges are ignored if model_type is not set to 'gcn' or 'pna'.
 #### 3.6.2 Example 2
 ``python run.py -m pna -d tcga_ccle_bc -e cor hic_inter pathway string dorothea``  
+This will train and test a pna model on tcga ccle breast cancer dataset and with additional edges such as correlations, PPI, Hic edges, and Pathway edges.
 
-This will train a pna model on tcga ccle breast cancer dataset and with additional edges such as correlations, PPI, Hic edges, and Pathway edges.
+#### 3.6.2 Example 3
+``python run.py -m gcn -d gtex_tcga_normal -e hic_intra spatial -k true -v false``  
+This will train a gcn model on the gtex dataset using edges from intra-chromo hic data and 1d spatial data, also, testing/validation is ignored.
+
 
 ## Team
 If you have any questions or concerns about the project, please contact the following team member:
