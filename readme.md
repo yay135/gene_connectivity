@@ -67,9 +67,8 @@ Run the following command to create a conda environment automatically.
 Activate the environment.  
 ``conda activate gnn_cuda``   
 #### 3.4.2 Configure for cpu
-If you don't have a GPU or if your system specs are different than specified, configure a CPU-only environment as follows:  
-Install Python 3.11 and pip on your system.  
-Run the following command to install all the required Python libraries.  
+If you don't have a GPU or if your system specs are different than specified,  
+configure a CPU-only environment using the following commands:
 ``cd gene_connectivity``  
 ``conda create -n gnn python=3.10``  
 ``conda activate gnn``  
