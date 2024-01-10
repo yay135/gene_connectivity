@@ -100,8 +100,8 @@ Options:
 -m/--model specify model type. Required.  
 -d/--data specify dataset configuration. Required.  
 -e/--edges specigy edges you wish to input to pna or gcn. Required if model is pna or gcn.   
--k/--mask specify whether to use masked datasets. Default is false.  
--v/--validation specify whether to run validation test after training. Default is true.   
+-k/--mask specify whether to use masked datasets. Optional, default is false.  
+-v/--validation specify whether to run validation test after training. Optional, default is true.   
 
 
 
