@@ -43,7 +43,7 @@ Anaconda @ 23.5.2
 NVIDIA GPU driver for Linux 510.47.03  
 CUDA 11.6  
 
-The following softwares are required if you to use cpu only:  
+The following softwares are required if you wish to use cpu only:  
 Ubuntu 20.04+  
 bash @ lastest   
 wget @ lastest  
