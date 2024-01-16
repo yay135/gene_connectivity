@@ -74,7 +74,7 @@ configure a CPU-only environment using the following commands:
 ``conda activate gnn``  
 ``python -m pip install -r requirements.txt``  
 
-### 3.5 Run training and validation
+### 3.5 Data and output
 #### 3.5.1 Data 
 Run the following command to initialize the required data:  
 ``python init_data.py``
