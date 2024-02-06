@@ -170,7 +170,7 @@ dependencies:
   - pip=23.2.1=py310h06a4308_0
   - platformdirs=3.8.1=py310h06a4308_0
   - prompt-toolkit=3.0.36=py310h06a4308_0
-  - prompt_toolkit=3.0.39=hd8ed1ab_0
+  #- prompt_toolkit=3.0.39=hd8ed1ab_0
   - ptyprocess=0.7.0=pyhd3eb1b0_2
   - pure_eval=0.2.2=pyhd3eb1b0_0
   - pycparser=2.21=pyhd3eb1b0_0
