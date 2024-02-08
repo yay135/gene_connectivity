@@ -80,7 +80,7 @@ Run the following command to initialize the required data:
 ``python init_data.py``
 
 #### 3.5.2 Data types
-The data includes expression data normalized and MinMax scaled. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
+The data includes expression data normalized and MinMax scaled. For simplicity and clarity, the code to process the data and the edges are not provided. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
 
 The X.csv is the training predictor gene expression dataset.  
 The y.csv is the training inferred gene expression dataset.  
