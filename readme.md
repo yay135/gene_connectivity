@@ -80,14 +80,14 @@ Run the following command to initialize the required data:
 ``python init_data.py``
 
 #### 3.5.2 Data types
-The data includes expression data normalized and MinMax scaled. For simplicity and clarity, the code to process the data and the edges are not provided. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
+The data includes expression data and edge data, expression data is first log2 transformed and then MinMax scaled. Edge data is mapped to the index of genes(columns). For simplicity and clarity, the code to process the data and the edges are not provided. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
 
 The X.csv is the training predictor gene expression dataset.  
 The y.csv is the training inferred gene expression dataset.  
 The X_val.csv is the testing predictor gene expression dataset.  
 The y_val.csv is the testing inferred gene expression dataset.  
 
-The edge datasets are in folders ending with "edges". The first column is the source of the edge, the second column is the target of the edge. For example, in pathway_gtex_tcga_normal.csv 3249,15423 indicates the 3249th column (X.csv , y.csv horizontally combined) is pointing the 15423rd column as an edge in dataset gtex_tcga_normal, each column is a gene and is 0 indexed.  
+The edge datasets are in folders ending with "edges". The first column is the source of the edge, the second column is the target of the edge. For example, in pathway_gtex_tcga_normal.csv 3249,15423 indicates the 3249th gene(column) (X.csv , y.csv horizontally combined) is pointing the 15423rd gene(column) in dataset gtex_tcga_normal, each column is a gene and is 0 indexed.  
 
 #### 3.5.3 Output
 The testing is automatically initialized after the training. The output is inferred gene expressions. They will appear in the folder model_out with model type, edge type, and training, and testing data information attached to the file name.
