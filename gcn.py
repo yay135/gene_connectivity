@@ -82,12 +82,6 @@ X_masked = pd.read_csv(X_masked_path)
 X = pd.read_csv(X_path)
 y = pd.read_csv(y_path)
 
-# downsize 
-down = np.random.choice(len(X), (min(2000, len(X),)))
-X_masked = X_masked.iloc[down,]
-X = X.iloc[down,]
-y = y.iloc[down,]
-
 def save_model_path():
     folder = gcn_model_path
     full = f"{folder}/{gcn_model_masked_name}" if is_masked else f"{folder}/{gcn_model_name}"
