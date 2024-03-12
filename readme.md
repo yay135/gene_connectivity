@@ -19,14 +19,14 @@ OR
 
 Arrange your expression data files in a single folder such as /path/to/exp/  
 Run the GCN model, replace $exp_path with your path to your expression files folder:  
-``docker run --rm -v $exp_path:/workspace gcn_con``    
+``docker run --rm -v $exp_path:/workspace yay135/gcn_con``    
 OR Run the GCN model:  
-``docker run --rm -v $exp_path:/workspace pna_con``  
+``docker run --rm -v $exp_path:/workspace yay135/pna_con``  
 
 By default, the model outputs scaled gene expressions, if you need to output in tpm format:  
-``docker run --rm -v $exp_path:/workspace gcn_con -e OUT_TPM='True'``  
+``docker run --rm -v $exp_path:/workspace yay135/gcn_con -e OUT_TPM='True'``  
 OR  
-``docker run --rm -v $exp_path:/workspace pna_con -e OUT_TPM='True'``    
+``docker run --rm -v $exp_path:/workspace yay135/pna_con -e OUT_TPM='True'``    
 
 The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension. For each csv file in your folder, you must have ENSG######### (ensemble ids with no versions) as headers, the headers must contain enough (at least 30%) of the predictor genes. Please refer to predictors.csv and inferred.csv for predictor and inferred genes. The genes are extracted for gtex_tcga_normal dataset.
 
