@@ -28,9 +28,9 @@ By default, the model outputs scaled gene expressions, if you need to output in 
 OR  
 ``docker run --rm -v $exp_path:/workspace pna_con -e OUT_TPM='True'``    
 
-The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension. For each csv file in your folder, you must have ENSG######### (ensemble ids with no versions) as headers, the headers must contain enough (at least 30%) of the predictor genes.   
+The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension. For each csv file in your folder, you must have ENSG######### (ensemble ids with no versions) as headers, the headers must contain enough (at least 30%) of the predictor genes. Please refer to predictors.csv and inferred.csv for predictor and inferred genes. The genes are extracted for gtex_tcga_normal dataset.
 
-The GCN and PNA models are build with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic.
+The GCN and PNA models are build with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic. The experssion data are extracted from the gtex_tcga_normal dataset.
 
 ## 2. Data and model
 Datasets are fully released. Due to the large size, model files are not released in this repository. This repository supports complete training and testing with the following models and options:  
