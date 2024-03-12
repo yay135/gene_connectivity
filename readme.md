@@ -7,6 +7,30 @@ This project aims to map gene connectivities using different deep-learning model
 
 Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs, etc. After the models were built, we compared the model performances and found that different gene edges result in drastically different mapping qualities in GNNs, some edges are more useful than others. Between models, some models show much stronger performance against other models suggesting high task specificities in gene mapping.
 
+## Quick run of the models, a docker build of our best models are available!
+### Docker
+Install Docker using the following link:  
+https://docs.docker.com/engine/install/  
+Pull our docker images:  
+``docker pull yay135/gcn_con``  
+OR  
+``docker pull yay135/pna_con``  
+
+Arrange your expression data files in a single folder such as /path/to/exp/  
+Run the GCN model, replace $exp_path with your path to your expression files folder:  
+``docker run --rm -v $exp_path:/workspace gcn_con``    
+OR Run the GCN model:  
+``docker run --rm -v $exp_path:/workspace pna_con``  
+
+By default, the model outputs scaled gene expressions, if you need to output in tpm format:  
+``docker run --rm -v $exp_path:/workspace gcn_con -e OUT_TPM='True'``  
+OR  
+``docker run --rm -v $exp_path:/workspace pna_con -e OUT_TPM='True'``    
+
+The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension. For each csv file in your folder, you must have ENSG######### (ensemble ids with no versions) as headers, the headers must contain enough (at least 30%) of the predictor genes.   
+
+The GCN and PNA models are build with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic.
+
 ## 2. Data and model
 Datasets are fully released. Due to the large size, model files are not released in this repository. This repository supports complete training and testing with the following models and options:  
 ### 2.1 Available models
