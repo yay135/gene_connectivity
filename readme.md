@@ -7,10 +7,11 @@ This project aims to map gene connectivities using different deep-learning model
 
 Gene connectivities are mapped extensively through GNNs with added edges such as biological pathways, correlations, regulations, PPIs, etc. After the models were built, we compared the model performances and found that different gene edges result in drastically different mapping qualities in GNNs, some edges are more useful than others. Between models, some models show much stronger performance against other models suggesting high task specificities in gene mapping.
 
-## Quick run of the models, a docker build of our best models are available!
-### Docker
+## Docker builds of our best models are now available!
+### Install Docker
 Install Docker using the following link:  
 https://docs.docker.com/engine/install/  
+### Run the models  
 Pull our docker images:  
 ``docker pull yay135/gcn_con``  
 OR  
