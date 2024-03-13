@@ -34,6 +34,8 @@ The commands will scan the your /path/to/exp/ and infer from all of files with "
 
 The GCN and PNA models are build with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic. **The Models are built for normal tissues**.
 
+**The following tutorials are for non-docker usages.**
+
 ## 2. Data and model
 Datasets are fully released. Due to the large size, model files are not released in this repository. This repository supports complete training and testing with the following models and options:  
 ### 2.1 Available models
