@@ -14,6 +14,7 @@ https://docs.docker.com/engine/install/
 Recommended System specs ubuntu 20.04 LTS or better with 24GB RAM or more with at least 30GB disk space.  
 ### Run the models  
 These are CPU-only builds.  
+
 Pull our docker images:  
 ``docker pull yay135/gcn_con``  
 OR  
