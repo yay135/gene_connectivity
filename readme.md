@@ -11,9 +11,11 @@ Gene connectivities are mapped extensively through GNNs with added edges such as
 ### Install Docker
 Install Docker using the following link:  
 https://docs.docker.com/engine/install/  
-Recommended System specs ubuntu 20.04 LTS or better with 24GB RAM or more with at least 30GB disk space.  
+Recommended system specs: ubuntu 20.04 LTS or better with 24GB RAM or more with at least 30GB disk space.  
 ### Run the models  
 These are CPU-only builds.  
+
+Open your terminal or command prompt and run the following commands:
 
 Pull our docker images:  
 ``docker pull yay135/gcn_con``  
