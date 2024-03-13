@@ -28,7 +28,9 @@ OR Run the GCN model:
 By default, the model outputs scaled gene expressions, if you need to output in tpm format:  
 ``docker run --rm -v $exp_path:/workspace -e OUT_TPM='True' yay135/gcn_con``  
 OR  
-``docker run --rm -v $exp_path:/workspace -e OUT_TPM='True' yay135/pna_con``    
+``docker run --rm -v $exp_path:/workspace -e OUT_TPM='True' yay135/pna_con``  
+
+### Important Info
 
 The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension. For each csv file in your folder, you must have **ENSG######### (ensemble ids with no versions) as headers**, the headers must contain enough (at least 30%) of the predictor genes, the expression value must be **RNA-seq TPM**. Please refer to predictors.csv and inferred.csv for predictor and inferred genes. The genes are extracted for gtex_tcga_normal dataset.
 
