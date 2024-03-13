@@ -35,7 +35,7 @@ OR
 
 ### Important Info
 
-The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension. For each csv file in your folder, you must have **ENSG######### (ensemble ids with no versions) as headers**, the headers must contain enough (at least 30%) of the predictor genes, the expression value must be **RNA-seq TPM**. Please refer to predictors.csv and inferred.csv for predictor and inferred genes. The genes are extracted for gtex_tcga_normal dataset.
+The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension and create an output file for each one. For each csv file in your folder, you must have **ENSG######### (ensemble ids with no versions) as headers**, the headers must contain enough (at least 30%) of the predictor genes, the expression value must be **RNA-seq TPM**. Please refer to predictors.csv and inferred.csv for predictor and inferred genes. The genes are extracted for gtex_tcga_normal dataset.
 
 The GCN and PNA models are build with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic. **The Models are built for normal tissues**.
 
