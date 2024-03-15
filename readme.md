@@ -12,7 +12,7 @@ Gene connectivities are mapped extensively through GNNs with added edges such as
 Install Docker using the following link:  
 https://docs.docker.com/engine/install/  
 Recommended system specs: ubuntu 20.04 LTS or better with 24GB RAM or more with at least 30GB disk space.  
-### Run the models  
+### Run the Models  
 These are CPU-only builds.  
 
 Open your terminal or command prompt and run the following commands:
@@ -37,23 +37,23 @@ OR
 
 The commands will scan the your /path/to/exp/ and infer from all of files with ".csv" extension and create an output file for each one. For each csv file in your folder, you must have **ENSG######### (ensemble ids with no versions) as headers**, the headers must contain enough (at least 30%) of the predictor genes, other non-predictor genes are ignored. The expression value must be **RNA-seq TPM**. Please refer to predictors.csv and inferred.csv for predictor and inferred genes. The genes are extracted for gtex_tcga_normal dataset.
 
-The GCN and PNA models are built with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic. **The Models are built for normal tissues**.
+The GCN and PNA models are built with the following edges: GCN: 3D inter chromosome, Pathway, 1D genomic, PNA: Correlation, 3D inter chromosome, 3D intra chromosome, Pathway, 1D genomic. **The models are built for normal tissues**.
 
 **The following tutorials are for non-docker usages.**
 
-## 2. Data and model
+## 2. Data and Models
 Datasets are fully released. Due to the large size, model files are not released in this repository. This repository supports complete training and testing with the following models and options:  
-### 2.1 Available models
+### 2.1 Available Models
 MLP  
 Autoencoder  
 LinearRegression  
 GCN  
 PNA
-### 2.2 Available datasets
+### 2.2 Available Datasets
 Training on GTEx normal, testing on TCGA normal    
 Training on TCGA BC, testing on CPTAC BC  
 Training on TCGA BC, testing on CCLE BC  
-### 2.3 Available edges 
+### 2.3 Available Edges 
 Correlation  
 String (PPI)  
 Dorothea (TF)  
@@ -62,7 +62,7 @@ Hi-C intra-chromosome (3D)
 Pathway  
 Spatial (1D)   
 ## 3. How to use this repo
-### 3.1 System requirements
+### 3.1 System Requirements
 Due to the immense connections and edges in a gene map (graph), the requirements to train a GCN or PNA to map 20000 genes are high.
 You must have at least 100GB free disk space, at least 64GB usable RAM size, and a 4-core CPU with AVX support.  
 A CUDA 11.6 compatible NVIDIA GPU with 48 GB or more VRAM. (If you are not able to meet the hardware requirements consider configure a cpu-only environment using the 3.4.2 instructions bellow)  
@@ -87,11 +87,11 @@ The rest of the softwares such as pytorch are configured automatically using con
 
 GPU or CPU selection is automated at the runtime.
 
-### 3.3 Clone the current project
+### 3.3 Clone the Current Project
 Run the following command to clone the project.  
 ``git clone https://github.com/yay135/gene_connectivity.git``  
-### 3.4 Configure environment
-#### 3.4.1 Configure for gpu
+### 3.4 Configure Environment
+#### 3.4.1 Configure for GPU
 Change the directory to the project root folder.  
 ``cd gene_connectivity``  
 
@@ -100,7 +100,7 @@ Run the following command to create a conda environment automatically.
 
 Activate the environment.  
 ``conda activate gnn_cuda``   
-#### 3.4.2 Configure for cpu
+#### 3.4.2 Configure for CPU
 If you don't have a GPU or if your system specs are different than specified,  
 configure a CPU-only environment using the following commands:  
 ``cd gene_connectivity``  
@@ -108,12 +108,12 @@ configure a CPU-only environment using the following commands:
 ``conda activate gnn``  
 ``python -m pip install -r requirements.txt``  
 
-### 3.5 Data and output
+### 3.5 Data and Output
 #### 3.5.1 Data 
 Run the following command to initialize the required data:  
 ``python init_data.py``
 
-#### 3.5.2 Data types
+#### 3.5.2 Data Types
 The data includes expression data and edge data, expression data is first log2 transformed and then MinMax scaled. Edge data is mapped to the index of genes(columns). For simplicity and clarity, the code to process the data and the edges are not provided. They are in folder "gtex_tcga_normal", "tcga_ccle_bc" and "tcga_cptac_bc". The first word indicates training data source, the second word indicates testing data source and the third word indicates whether the data is normal or breast cancer. For example, "gtex_tcga_normal" indicates training on gtex normal dataset and testing on tcga normal dataset.  
 
 The X.csv is the training predictor gene expression dataset.  
@@ -126,7 +126,7 @@ The edge datasets are in folders ending with "edges". The first column is the so
 #### 3.5.3 Output
 The testing is automatically initialized after the training. The output is inferred gene expressions. They will appear in the folder model_out with model type, edge type, and training, and testing data information attached to the file name.
 
-### 3.6 Example tasks
+### 3.6 Example Tasks
 CD into the root folder, and modify the configure.py to run different tasks.  
 Options:  
 --help show all available options.    
