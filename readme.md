@@ -1,7 +1,7 @@
 # Project Gene Connectivity
 ## 1. Introduction
 
-![alt text](https://github.com/yay135/gene_connectivity/blob/master/arch_gene_connectivity.png?raw=true)
+![alt text](https://github.com/yay135/gene_connectivity/blob/master/arch_gene_connectivity.jpg?raw=true)
 
 This project aims to map gene connectivities using different deep-learning models such as MLP, Autoencoders, and GNNs with additional gene edges. Our primary contribution is the Introduction of GNNs into gene mapping as shown above. Due to the unique abilities of GNNs to utilize nodes and edges, we can incorporate more types of biological information resulting in an overall much better mapping performance.  
 
