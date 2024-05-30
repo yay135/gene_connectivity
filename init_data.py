@@ -4,7 +4,7 @@ subprocess.run(['bash', 'gdownload.sh'])
 from zipfile import ZipFile 
   
 # loading the temp.zip and creating a zip object 
-with ZipFile("project_gene_transformer_data.zip", 'r') as zObject: 
+with ZipFile("project_gene_connectivity_data.zip", 'r') as zObject: 
   
     # Extracting all the members of the zip  
     # into a specific location. 
